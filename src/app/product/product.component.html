@@ -1,0 +1,39 @@
+
+
+<app-product-list  (visible)="receiveFromChild($event)" (message)="getFromChild($event)"></app-product-list>
+
+{{message}}
+
+<hr>
+{{product | json}}
+<hr>
+{{productForm.invalid | json}}
+{{productForm.valid | json}}
+{{productForm.value | json}}
+<form #productForm="ngForm" (submit)="addProduct()" novalidate>
+<div class="form-group">
+    <input type="number" class="form-control" name="id" #pid="ngModel"   [(ngModel)]="product.id" placeholder="Enter user Id" required>
+</div>
+<div class="form-group">
+    <input type="text" class="form-control" name="name" #pid="ngModel" min="3" max="10" [(ngModel)]="product.name" placeholder="Enter username" required>
+</div>
+<div class="form-group">
+    <input type="text" class="form-control" name="address" #pid="ngModel" [(ngModel)]="product.address" placeholder="Enter your address" required>
+</div>
+<div class="form-group">
+    <input type="number" class="form-control" name="mobileno" #pid="ngModel" min="3" max="10" [(ngModel)]="product.mobileno" placeholder="Enter your mobile no." required>
+</div>
+<div>
+    <button [disabled]="productForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+</div>
+
+{{pid.invalid | json}}
+{{pid.valid | json}}
+{{pid.value | json}}
+{{pid.error | json}}
+{{pid.pristine | json}}
+{{pid.dirty | json}}
+</form>
+
+
+

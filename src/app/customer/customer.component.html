@@ -1,0 +1,85 @@
+<h1>{{customerForm.value | json}}</h1>
+<div *ngIf= "formSubmit">
+  Data Saved!!
+</div>
+
+<form [formGroup]="customerForm" (submit)="addCustomer()" novalidate>
+  <div class="form-group">
+    <input type="text" class="form-control" formControlName="name" name="name" placeholder="Enter Your Name">
+  </div>
+  <div>
+    {{customerForm.get('name').invalid | json}}
+    {{customerForm.get('name').valid | json}}
+    {{customerForm.get('name').value | json}}
+    {{customerForm.get('name').errors | json}}
+  </div>
+  <div class="form-group">
+    <input type="date" class="form-control" formControlName="dob" name="dob" placeholder="Enter Your Date-of-Birth">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" formControlName="email" name="email" placeholder="Enter Your Email ID">
+  </div>
+  <div class="form-group">
+    <input type="number" class="form-control" formControlName="mobile" name="mobile" placeholder="Enter Your Mobile No.">
+  </div>
+
+  <div formGroupName="address">
+     <div class="form-group"> 
+    <input type="text" class="form-control" formControlName="addressLine1" name="addressLine1" placeholder="Address Line1" required>
+  </div>
+  <div>
+    {{customerForm.get('address.addressLine1').valid | json}}
+    {{customerForm.get('address.addressLine1').invalid | json}}
+    {{customerForm.get('address.addressLine1').value | json}}
+  </div>
+  <div class="form-group"> 
+      <input type="text" class="form-control" formControlName="addressLine2" name="addressLine2" placeholder="Address Line2"  required>
+    </div>
+    <div class="form-group"> 
+        <input type="text" class="form-control" formControlName="city" name="city" placeholder="Enter your city"  required>
+    </div> 
+    <div class="form-group"> 
+        <input type="text" class="form-control" formControlName="state" name="state" placeholder="Enter your state"  required>
+    </div> 
+    <div class="form-group"> 
+        <input type="number" class="form-control" formControlName="pin" name="pin" placeholder="Enter your Area Pin"  required>
+    </div>    
+  </div>
+
+  <div>
+    <button type="button" (click)="addCard()" class="btn btn-primary">Add Card</button>
+  </div>
+  <div class="form-group" formArrayName="cards">
+   <div *ngFor="let card of customerForm.controls.cards.controls; let i = index">
+      <div [formGroupName]="i">
+        <div class="form-group"> 
+          <input type="number" class="form-control" formControlName="cardNumber" name="cardNumber" placeholder="Enter your Area CardNo."  required>
+      </div>
+      <div>
+        {{customerForm.get(['cards',i,'cardNumber']).invalid | json}}
+        {{customerForm.get(['cards',i,'cardNumber']).valid | json}}
+        {{customerForm.get(['cards',i,'cardNumber']).value | json}}
+      </div> 
+      <div class="form-group"> 
+        <input type="number" class="form-control" formControlName="expiryMonth" name="expiryMonth" placeholder="Enter your Area Expiry Month"  required>
+    </div> 
+    <div class="form-group"> 
+      <input type="number" class="form-control" formControlName="expiryYear" name="expiryYear" placeholder="Enter your Area Expiry Year"  required>
+  </div> 
+  <div class="form-group"> 
+    <input type="number" class="form-control" formControlName="cvv" name="cvv" placeholder="Enter your Area CVV No."  required>
+</div> 
+
+<div>
+  <button type="button" (click)="removeCard(i)" class="btn btn-danger">Remove Card</button>
+</div>
+      </div>
+   </div>
+
+
+  </div>
+
+  <div>
+    <button type="submit" [disabled]="customerForm.inavlid" class="btn btn-primary">Submit</button>
+  </div>
+</form>

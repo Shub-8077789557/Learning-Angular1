@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Item</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+    <tbody>
+      <tr *ngFor="let product of productList">
+        <td>{{product.id}}</td>
+        <td>{{product.item}}</td>
+        <td>{{product.price}}</td>
+      </tr>
+    </tbody>
+</table>
+
+<button class="btn btn-primary" (click)="sendToParent()">Send To Parent</button>

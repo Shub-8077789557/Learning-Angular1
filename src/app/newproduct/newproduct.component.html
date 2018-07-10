@@ -1,0 +1,19 @@
+<h1>{{ListofProducts}}</h1>
+<input type="number" name="price" class="form-control" [(ngModel)]="mrp" placeholder="Price">
+<table class="table">
+   <thead>
+     <tr> 
+     <th>ProductNo</th>
+     <th>Product</th>
+     <th>ProductPrice</th>
+    </tr>
+   </thead>
+   <tbody>
+     <tr *ngFor = "let newitem of newproducts | price:mrp">
+       <td><button type="button"  mat-raised-button color="accent" [routerLink]="[newitem.ProductNo]" >Details</button></td>
+       <td>{{newitem.Product | uppercase}}</td>
+       <td>{{newitem.ProductPrice | appcurrency: 'Rs':2}}</td>
+     </tr>
+   </tbody>
+</table>
+
